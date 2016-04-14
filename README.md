@@ -7,13 +7,13 @@ Created by [Jon Hermansen](https://github.com/jh86) / [@jonhermansen](https://tw
 
 # About me
 		    
-`
+```perl
 #!/usr/bin/perl
 
 my $workplace = 'Verizon Digital Media';
 sub job_function { return 'Software Engineer in Test'; }
 my @languages = qw/js perl python/;
-`
+```
 
 ---
 
