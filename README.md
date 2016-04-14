@@ -51,8 +51,8 @@ my @languages = qw/js perl python/;
 ## You don't even need to know how to code!
 
 * You can record your actions and generate test code using these browser plugins:
-    * Selenium IDE: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
-    * selenium-builder: https://github.com/SeleniumBuilder/selenium-builder
+    * [Selenium IDE]()
+    * [Selenium Builder]()
     * 
 * API testing? No problem!
     * https://www.getpostman.com/
@@ -284,12 +284,14 @@ It's complicated... which client do you use?
     * checkstyle: https://github.com/jenkinsci/checkstyle-plugin
     * warnings: https://github.com/jenkinsci/warnings-plugin
     * violations: https://github.com/jenkinsci/violations-plugin
-    * sonarqube (JAH TODO: no github link?): https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin
+    * sonarqube: https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin
 
 ---
 
-# The end.
+# Questions?
 
   [google]: http://google.com/        "Google"
   [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
   [msn]:    http://search.msn.com/    "MSN Search"
+  [selenium-ide]:	https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/	"Selenium IDE"
+  [selenium-builder]:	https://github.com/SeleniumBuilder/selenium-builder		"Selenium Builder"
