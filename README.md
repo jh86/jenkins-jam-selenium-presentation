@@ -1,7 +1,9 @@
 # Selenium testing with Jenkins for great justice!
 ## Tips and tricks to make the most of your automated testing
 
-Created by Jon Hermansen [github.com/jh86](https://github.com/jh86) [twitter.com/jonhermansen](https://twitter.com/jonhermansen)
+Created by Jon Hermansen
+[github.com/jh86](https://github.com/jh86)
+[twitter.com/jonhermansen](https://twitter.com/jonhermansen)
 
 ---
 
