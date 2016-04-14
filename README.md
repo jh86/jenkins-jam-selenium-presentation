@@ -39,10 +39,10 @@ my @languages = qw/js perl python/;
 # What should I test?
 
 * Do you take orders/payments online?
-  * Follow the money
-  * Automate placing test orders in a staging environment, then see if you can run this infrequently in production
+    * Follow the money
+    * Automate placing test orders in a staging environment, then see if you can run this infrequently in production
 * What features provide the most value to your customers?
-  * Use analytics to determine what actions users take the most
+    * Use analytics to determine what actions users take the most
 * Look at browser usage to determine which browser should be mainly used for test development
 
 ---
@@ -51,12 +51,12 @@ my @languages = qw/js perl python/;
 ## You don't even need to know how to code!
 
 * You can record your actions and generate test code using these browser plugins:
-  * Selenium IDE: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
-  * selenium-builder: https://github.com/SeleniumBuilder/selenium-builder
-  * 
+    * Selenium IDE: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
+    * selenium-builder: https://github.com/SeleniumBuilder/selenium-builder
+    * 
 * API testing? No problem!
-  * https://www.getpostman.com/
-  * newman: https://github.com/postmanlabs/newman
+    * https://www.getpostman.com/
+    * newman: https://github.com/postmanlabs/newman
 
 ---
 
@@ -82,12 +82,12 @@ my @languages = qw/js perl python/;
 
 * TAP - tap2junit: http://search.cpan.org/~gtermars/TAP-Formatter-JUnit-0.08/bin/tap2junit
 * NUnit
-  * nunit: https://github.com/jenkinsci/nunit-plugin
-    * Has drawbacks, I prefer to use the stock JUnit reporter plugin so I convert NUnit to JUnit at the end of shell steps
-  * nunit-to-junit: https://github.com/jenkinsci/nunit-plugin/blob/master/src/main/resources/hudson/plugins/nunit/nunit-to-junit.xsl
-    * xsltproc to the rescue!
+    * nunit: https://github.com/jenkinsci/nunit-plugin
+      * Has drawbacks, I prefer to use the stock JUnit reporter plugin so I convert NUnit to JUnit at the end of shell steps
+    * nunit-to-junit: https://github.com/jenkinsci/nunit-plugin/blob/master/src/main/resources/hudson/plugins/nunit/nunit-to-junit.xsl
+      * xsltproc to the rescue!
 * CUnit
-  * cunit-to-junit: http://git.cyrusimap.org/cyrus-imapd/plain/cunit/cunit-to-junit.pl
+    * cunit-to-junit: http://git.cyrusimap.org/cyrus-imapd/plain/cunit/cunit-to-junit.pl
 
 
 ---
@@ -95,7 +95,7 @@ my @languages = qw/js perl python/;
 # Look for a test runner that:
 
 * has built in JUnit reporting (no plugins)
-  * nice to have: including skipped test reporting
+    * nice to have: including skipped test reporting
 * is easy to integrate your tests with
 * is easy to install on all applicable platforms
 * nice to have: can capture stdout/stderr and timing information from your test cases
@@ -137,10 +137,10 @@ It's complicated... which client do you use?
 
 * Firefox is lenient, does not throw an exception if element is off screen
 * Chrome will warn about missing/hidden elements, forcing you to code around asynchronous HTTP requests
-  * You may need to set Selenium's resolution explicitly
-  * Lazy case: look for one of the last elements that is loaded on the screen before you start your test
-  * Best case: add a hook (global variable?) that your production application can use to signal it is ready for testing
-  * Worst case: hook XmlHttpRequest until you see the required URL, wait until it is loaded, then run test code
+    * You may need to set Selenium's resolution explicitly
+    * Lazy case: look for one of the last elements that is loaded on the screen before you start your test
+    * Best case: add a hook (global variable?) that your production application can use to signal it is ready for testing
+    * Worst case: hook XmlHttpRequest until you see the required URL, wait until it is loaded, then run test code
 
 ---
 
@@ -167,7 +167,7 @@ It's complicated... which client do you use?
 # Sauce Labs
 
 * Run your tests as frequently and as quickly as possible
-  * Provide quicker feedback to developers when they've broken something
+    * Provide quicker feedback to developers when they've broken something
 * Sauce Labs and similar services will enable you to do this.
 * NOT managing your own Selenium infrastructure will pay off in the short term.
 * See also: http://www.seleniumhq.org/ecosystem/
@@ -196,7 +196,7 @@ It's complicated... which client do you use?
 * Add your credentials to Jenkins as an admin
 * Allow your credentials' use by colleagues
 * Git hack for HTTPS only: create a ~/.netrc file
-  * You can use a revokable API key as a password with GitHub
+    * You can use a revokable API key as a password with GitHub
 
 ---
 
@@ -215,9 +215,9 @@ It's complicated... which client do you use?
 # Make your Jenkins instance accessible
 
 * Use dynamic DNS and/or a hosted DNS service
-  * Makes your instance available by a convenient name, usable by others
-  * You can create an external DNS record that refers to your internal network
-  * If you can get a static IP, this will make your machine available to anyone on your LAN
+    * Makes your instance available by a convenient name, usable by others
+    * You can create an external DNS record that refers to your internal network
+    * If you can get a static IP, this will make your machine available to anyone on your LAN
 
 ---
 
@@ -227,10 +227,10 @@ It's complicated... which client do you use?
 * CI should be consumable by all stakeholders
 * Jobs that are created but broken are basically useless to anyone else but you
 * Clean up after yourself!
-  * You can hide your experimental jobs in a folder:
+    * You can hide your experimental jobs in a folder:
 --- cloudbees-folder (open source!): https://github.com/jenkinsci/cloudbees-folder-plugin
 * Create an "information radiator" using Jenkins
-  * Set up a second monitor to display it at all times
+    * Set up a second monitor to display it at all times
 
 ---
 
@@ -247,12 +247,12 @@ It's complicated... which client do you use?
 # Authentication and Authorization
 
 * active-directory: https://github.com/jenkinsci/active-directory-plugin
-  * This plugin only requires the hostname of your AD server
+    * This plugin only requires the hostname of your AD server
 * github-oauth: https://github.com/jenkinsci/github-oauth-plugin
-  * Easy to set up as a non-admin user
-  * Works with enterprise GitHub installations
+    * Easy to set up as a non-admin user
+    * Works with enterprise GitHub installations
 * ldap: https://github.com/jenkinsci/ldap-plugin
-  * More complex setup, dependent on your LDAP schema
+    * More complex setup, dependent on your LDAP schema
 * Matrix-based security: https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security
 
 ---
@@ -261,16 +261,16 @@ It's complicated... which client do you use?
 
 * On a developer's workstation, assume no environment variables are set, pick a default browser
 * Within Jenkins, no or some environment variables may be set
-  * JENKINS_HOME can be used to easily determine whether we're running under Jenkins
-  * Sauce Labs plugin sets certain environment variables that can be used by your test dynamically
-  * Wiki: https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin
+    * JENKINS_HOME can be used to easily determine whether we're running under Jenkins
+    * Sauce Labs plugin sets certain environment variables that can be used by your test dynamically
+    * Wiki: https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin
 
 ---
 
 # Testing your tests (Yo dawg)
 
 * Add a git pre-commit hook to prevent code from being committed that won't compile
-  * Check this at build time too
+    * Check this at build time too
 * You can unit test your tests!
 * git-validated-merge (enterprise): https://www.cloudbees.com/products/cloudbees-jenkins-platform/team-edition/features/validated-merge-plugin
 * Look out for gross code...
@@ -281,10 +281,10 @@ It's complicated... which client do you use?
 
 * git pre-commit hook again
 * alternatively, a git post-commit hook can clean your code up after you
-  * checkstyle: https://github.com/jenkinsci/checkstyle-plugin
-  * warnings: https://github.com/jenkinsci/warnings-plugin
-  * violations: https://github.com/jenkinsci/violations-plugin
-  * sonarqube (JAH TODO: no github link?): https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin
+    * checkstyle: https://github.com/jenkinsci/checkstyle-plugin
+    * warnings: https://github.com/jenkinsci/warnings-plugin
+    * violations: https://github.com/jenkinsci/violations-plugin
+    * sonarqube (JAH TODO: no github link?): https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin
 
 ---
 
