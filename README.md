@@ -1,7 +1,7 @@
 # Selenium testing with Jenkins for great justice!
 ## Tips and tricks to make the most of your automated testing
 
-Created by [Jon Hermansen](https://github.com/jh86) / [@jonhermansen](https://twitter.com/jonhermansen)
+Created by Jon Hermansen [github.com/jh86](https://github.com/jh86( [twitter.com/jonhermansen](https://twitter.com/jonhermansen)
 
 ---
 
@@ -20,10 +20,13 @@ my @languages = qw/js perl python/;
 # Agenda
 
 1. Test philosophy
-2. Jenkins job setup
-3. ...
+2. Selenium intro
+3. Jenkins job setup
+4. Maintaining your tests in the long term
 
-[Google][]
+---
+
+# Test philosophy
 
 ---
 
@@ -47,16 +50,37 @@ my @languages = qw/js perl python/;
 
 ---
 
+# How's your test reporting?
+
+* If you're already using a test runner with pluggable reporters, you can probably have it write a JUnit report.
+* You can easily add JUnit or TAP test reporting to your existing test suite.
+* Worst case, if your test code calls pass() or fail() functions you can hook them.
+* TAP is also a thing!
+
+---
+
+# Selenium intro
+
+---
+
+# What is Selenium?
+
+* "[...] a suite of tools to automate web browsers across many platforms"
+* Includes a backend server (a Java .jar) and client libraries for many languages
+* A huge ecosystem of testing tools have been built around it
+
+---
+
 # It's easy to get started!
 ## You don't even need to know how to code!
 
 * You can record your actions and generate test code using these browser plugins:
-    * [selenium-ide]()
-    * [selenium-builder]()
-    * 
+    * Firefox only :(
+    * [Selenium IDE](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/)
+    * [Selenium Builder](http://seleniumbuilder.github.io/se-builder/)
 * API testing? No problem!
-    * https://www.getpostman.com/
-    * newman: https://github.com/postmanlabs/newman
+    * [Postman](https://www.getpostman.com/)
+    * [newman](https://github.com/postmanlabs/newman)
 
 ---
 
@@ -69,20 +93,12 @@ my @languages = qw/js perl python/;
 
 ---
 
-# How's your test reporting?
-
-* If you're already using a test runner with pluggable reporters, you can probably have it write a JUnit report.
-* You can easily add JUnit or TAP test reporting to your existing test suite.
-* Worst case, if your test code calls pass() or fail() functions you can hook them.
-* TAP is also a thing!
-
----
-
 # Dealing with other types of reporters
 
-* TAP - tap2junit: http://search.cpan.org/~gtermars/TAP-Formatter-JUnit-0.08/bin/tap2junit
-* NUnit
-    * nunit: https://github.com/jenkinsci/nunit-plugin
+* [TAP](https://testanything.org/)
+  * [tap2junit](http://search.cpan.org/~gtermars/TAP-Formatter-JUnit-0.08/bin/tap2junit)
+* [NUnit](http://www.nunit.org/)
+    * [nunit-plugin]: https://github.com/jenkinsci/nunit-plugin
       * Has drawbacks, I prefer to use the stock JUnit reporter plugin so I convert NUnit to JUnit at the end of shell steps
     * nunit-to-junit: https://github.com/jenkinsci/nunit-plugin/blob/master/src/main/resources/hudson/plugins/nunit/nunit-to-junit.xsl
       * xsltproc to the rescue!
@@ -246,24 +262,26 @@ It's complicated... which client do you use?
 
 # Authentication and Authorization
 
-* active-directory: https://github.com/jenkinsci/active-directory-plugin
+* [Active Directory Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Active+Directory+plugin)
     * This plugin only requires the hostname of your AD server
-* github-oauth: https://github.com/jenkinsci/github-oauth-plugin
+* [GitHub Authentication Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Github+OAuth+Plugin)
     * Easy to set up as a non-admin user
     * Works with enterprise GitHub installations
-* ldap: https://github.com/jenkinsci/ldap-plugin
-    * More complex setup, dependent on your LDAP schema
+* [LDAP Plugin](https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Plugin)
+    * More complex setup which is dependent on your LDAP schema
 * Matrix-based security: https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security
+    * Give permissions based on groups
 
 ---
 
 # Where is my test running?
 
-* On a developer's workstation, assume no environment variables are set, pick a default browser
+* On a developer's workstation, assume no environment variables are set and pick a default browser
 * Within Jenkins, no or some environment variables may be set
     * JENKINS_HOME can be used to easily determine whether we're running under Jenkins
     * Sauce Labs plugin sets certain environment variables that can be used by your test dynamically
-    * Wiki: https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin
+      * SELENIUM_HOST, SELENIUM_PORT, SELENIUM_PLATFORM, SELENIUM_BROWSER, SELENIUM_VERSION
+      * [More info here](https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin)
 
 ---
 
@@ -272,8 +290,8 @@ It's complicated... which client do you use?
 * Add a git pre-commit hook to prevent code from being committed that won't compile
     * Check this at build time too
 * You can unit test your tests!
-* git-validated-merge (enterprise): https://www.cloudbees.com/products/cloudbees-jenkins-platform/team-edition/features/validated-merge-plugin
-* Look out for gross code...
+* [Validated Merge Plugin](https://www.cloudbees.com/products/cloudbees-jenkins-platform/team-edition/features/validated-merge-plugin) (Jenkins Enterprise only)
+* Look out for ugly code...
 
 ---
 
@@ -281,18 +299,12 @@ It's complicated... which client do you use?
 
 * git pre-commit hook again
 * alternatively, a git post-commit hook can clean your code up after you
-    * checkstyle: https://github.com/jenkinsci/checkstyle-plugin
-    * warnings: https://github.com/jenkinsci/warnings-plugin
-    * violations: https://github.com/jenkinsci/violations-plugin
-    * sonarqube: https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin
+    * [Checkstyle Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Checkstyle+Plugin)
+    * [Warnings Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin)
+    * [Violations Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Violations)
+    * [SonarQube Plugin](https://wiki.jenkins-ci.org/display/JENKINS/SonarQube+plugin)
 
 ---
 
 # Questions?
-
-  [google]: http://google.com/        "Google"
-  [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-  [msn]:    http://search.msn.com/    "MSN Search"
-  [selenium-ide]:	https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
-  [selenium-builder]:	https://github.com/SeleniumBuilder/selenium-builder
   
