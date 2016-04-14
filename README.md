@@ -51,8 +51,8 @@ my @languages = qw/js perl python/;
 ## You don't even need to know how to code!
 
 * You can record your actions and generate test code using these browser plugins:
-    * [Selenium IDE]()
-    * [Selenium Builder]()
+    * [selenium-ide]()
+    * [selenium-builder]()
     * 
 * API testing? No problem!
     * https://www.getpostman.com/
@@ -293,5 +293,6 @@ It's complicated... which client do you use?
   [google]: http://google.com/        "Google"
   [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
   [msn]:    http://search.msn.com/    "MSN Search"
-  [selenium-ide]:	https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/	"Selenium IDE"
-  [selenium-builder]:	https://github.com/SeleniumBuilder/selenium-builder		"Selenium Builder"
+  [selenium-ide]:	https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
+  [selenium-builder]:	https://github.com/SeleniumBuilder/selenium-builder
+  
