@@ -2,7 +2,7 @@ all: build
 
 build:
 	perl generator.pl > build/index.html
-	-mkdir build/img build/js
+	-@mkdir build/img build/js
 	cp js/remark-latest.min.js build/js
 	cp -R img/* build/img/
 
