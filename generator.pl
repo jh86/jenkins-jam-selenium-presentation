@@ -34,7 +34,7 @@ my $template = <<END_TEMPLATE;
 
 ${markdown}
     </textarea>
-    <script src="./remark-latest.min.js">
+    <script src="js/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create();
