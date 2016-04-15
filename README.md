@@ -30,8 +30,9 @@ my @languages = qw/js perl python/;
 
 1. Test philosophy
 2. Selenium intro
-3. Jenkins job setup
-4. Maintaining your tests in the long term
+3. Jenkins job setup tips
+4. Sharing Jenkins with colleagues
+5. Maintaining your tests in the long term
 
 ---
 
@@ -61,12 +62,11 @@ class: center, middle
 
 ---
 
-# How's your test reporting?
+# Tests = Monitoring?
 
-* If you're already using a test runner with pluggable reporters, you can probably have it write a JUnit report.
-* You can easily add JUnit or TAP test reporting to your existing test suite.
-* Worst case, if your test code calls pass() or fail() functions you can hook them.
-* TAP is also a thing!
+* test, noun - a procedure intended to establish the quality, performance, or reliability of something, especially before it is taken into widespread use.
+* mon·i·tor, noun - an instrument or device used for observing, checking, or keeping a continuous record of a process or quantity.
+* Monitoring is just running tests after deployments to production (carefully)?
 
 ---
 
@@ -78,67 +78,39 @@ class: center, middle
 
 # What is Selenium?
 
-* "[...] a suite of tools to automate web browsers across many platforms"
+> a suite of tools to automate web browsers across many platforms
+
 * Includes a backend server (a Java .jar) and client libraries for many languages
 * A huge ecosystem of testing tools have been built around it
 
 ---
 
 # It's easy to get started
-## You don't even need to know how to code!
 
+* You don't even need to know how to code!
 * You can record your actions and generate test code using these browser plugins:
     * [Selenium IDE](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/)
     * [Selenium Builder](http://seleniumbuilder.github.io/se-builder/)
-* API testing? No problem!
+* API testing too? No problem!
     * [Postman](https://www.getpostman.com/)
     * [newman](https://github.com/postmanlabs/newman)
+* You could even integrate your API tests with your UI tests!
+    * POST via API, check via UI
+    * Submit form via UI, check via API
 
 ---
 
 # Should I use Selenium RC (v1) or WebDriver (v2, v3)?
 
 * Selenium RC is dead, effectively
-* WebDriver is the new way forward!
-* WebDriver is becoming a W3C standard: https://www.w3.org/TR/webdriver/
+* WebDriver can do pretty much anything RC does
+* WebDriver is becoming a [W3C standard](https://www.w3.org/TR/webdriver/)
 * If needed, you can mix Selenium RC commands with WebDriver commands in your test
+* Don't hold your breath for Selenium 3?
 
 ---
 
-# Dealing with other types of reporters
-
-* [TAP](https://testanything.org/)
-  * [tap2junit](http://search.cpan.org/~gtermars/TAP-Formatter-JUnit-0.08/bin/tap2junit)
-* [NUnit](http://www.nunit.org/)
-    * [nunit-plugin]: https://github.com/jenkinsci/nunit-plugin
-      * Has drawbacks, I prefer to use the stock JUnit reporter plugin so I convert NUnit to JUnit at the end of shell steps
-    * nunit-to-junit: https://github.com/jenkinsci/nunit-plugin/blob/master/src/main/resources/hudson/plugins/nunit/nunit-to-junit.xsl
-      * xsltproc to the rescue!
-* CUnit
-    * cunit-to-junit: http://git.cyrusimap.org/cyrus-imapd/plain/cunit/cunit-to-junit.pl
-
-
----
-
-# Look for a test runner that:
-
-* has built in JUnit reporting (no plugins)
-    * nice to have: including skipped test reporting
-* is easy to integrate your tests with
-* is easy to install on all applicable platforms
-* nice to have: can capture stdout/stderr and timing information from your test cases
-
----
-
-# JUnit reporters/test runners:
-
-* NodeJS - mocha: https://mochajs.org/
-* Python - pytest: http://pytest.org/latest/
-* Bash? - shell2junit: https://code.google.com/archive/p/shell2junit/
-
----
-
-# Selenium basics
+# Choosing a Selenium client driver
 
 It's complicated... which client do you use?
 
@@ -149,7 +121,12 @@ It's complicated... which client do you use?
 
 ---
 
-# Selenium Grid basics
+# Selenium Grid
+
+Grid allows you to:
+* scale by distributing tests on several machines ( parallel execution )
+* manage multiple environments from a central point, making it easy to run the tests against a vast combination of browsers / OS.
+* minimize the maintenance time for the grid by allowing you to implement custom hooks to leverage virtual infrastructure for instance.
 
 1. Install Jenkins 
 2. Install [Selenium Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Selenium+Plugin)
@@ -167,6 +144,53 @@ It's complicated... which client do you use?
     * **Lazy case**: look for one of the last elements that is loaded on the screen before you start your test
     * **Best case**: add a hook (global variable?) that your production application can use to signal it is ready for testing
     * Worst case: hook XmlHttpRequest until you see the required URL, wait until it is loaded, then run test code
+
+---
+
+class: center, middle
+
+# Jenkins job setup tips
+
+---
+
+# How's your test reporting?
+
+* If you're already using a test runner with pluggable reporters, you can probably have it write a JUnit report.
+* You can easily add JUnit or TAP test reporting to your existing test suite.
+* Worst case, if your test code calls pass() or fail() functions you can hook them.
+* TAP is also a thing!
+
+---
+
+# JUnit reporters/test runners:
+
+* NodeJS - [mocha](https://mochajs.org/)
+* Python - [pytest](http://pytest.org/latest/)
+* Bash? - shell2junit: https://code.google.com/archive/p/shell2junit/
+
+---
+
+# Look for a test runner that:
+
+* Has built in JUnit reporting (no plugins)
+    * nice to have: skipped test reporting
+* Is easy to integrate your tests with
+* Is easy to install on all applicable platforms
+* Nice to have: can capture stdout/stderr and timing information
+
+---
+
+# Dealing with other types of reporters
+
+* [TAP](https://testanything.org/)
+  * [tap2junit](http://search.cpan.org/~gtermars/TAP-Formatter-JUnit-0.08/bin/tap2junit)
+* [NUnit](http://www.nunit.org/)
+    * [NUnit Plugin](https://wiki.jenkins-ci.org/display/JENKINS/NUnit+Plugin)
+      * Has drawbacks, I prefer to use the stock JUnit reporter plugin so I convert NUnit to JUnit at the end of shell steps
+    * nunit-to-junit: https://github.com/jenkinsci/nunit-plugin/blob/master/src/main/resources/hudson/plugins/nunit/nunit-to-junit.xsl
+      * xsltproc to the rescue!
+* [CUnit](http://cunit.sourceforge.net/)
+    * [cunit-to-junit](http://git.cyrusimap.org/cyrus-imapd/plain/cunit/cunit-to-junit.pl)
 
 ---
 
@@ -191,6 +215,14 @@ It's complicated... which client do you use?
 
 ---
 
+# Destructive tests
+
+* Skip when running on production
+* Always try to cleanup on CTRL+C / signals
+* Don't forget to close your Selenium session!
+
+---
+
 # Sauce Labs
 
 * Run your tests as frequently and as quickly as possible
@@ -201,19 +233,20 @@ It's complicated... which client do you use?
 
 ---
 
-# Tests = Monitoring?
+# Where is my test running?
 
-* test, noun - a procedure intended to establish the quality, performance, or reliability of something, especially before it is taken into widespread use.
-* mon·i·tor, noun - an instrument or device used for observing, checking, or keeping a continuous record of a process or quantity.
-* Monitoring is just running tests after deployments to production (carefully)?
+* On a developer's workstation, assume no environment variables are set and pick a default browser
+* Within Jenkins, no or some environment variables may be set
+    * JENKINS_HOME can be used to easily determine whether we're running under Jenkins
+    * Sauce Labs plugin sets certain environment variables that can be used by your test dynamically
+      * SELENIUM_HOST, SELENIUM_PORT, SELENIUM_PLATFORM, SELENIUM_BROWSER, SELENIUM_VERSION
+      * [More info here](https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin)
 
 ---
 
-# Destructive tests
+class: center, middle
 
-* Skip when running on production
-* Always try to cleanup on CTRL+C / signals
-* Don't forget to close your Selenium session!
+# Sharing Jenkins with colleagues
 
 ---
 
@@ -256,11 +289,10 @@ It's complicated... which client do you use?
 
 # Make your Jenkins instance accessible
 
-* Use dynamic DNS and/or a hosted DNS service
+* Use dynamic DNS and/or a hosted DNS service (CloudFlare?)
     * Makes your instance available by a convenient name, usable by others
     * You can create an external DNS record that refers to your internal network
-    * If you can get a static IP, this will make your machine available to anyone on your LAN
-
+      * CNAME work.jenkins-user.net -> jenkins-users-desktop.internal-network-name.biz
 ---
 
 # Show your progress frequently
@@ -289,14 +321,9 @@ It's complicated... which client do you use?
 
 ---
 
-# Where is my test running?
+class: center, middle
 
-* On a developer's workstation, assume no environment variables are set and pick a default browser
-* Within Jenkins, no or some environment variables may be set
-    * JENKINS_HOME can be used to easily determine whether we're running under Jenkins
-    * Sauce Labs plugin sets certain environment variables that can be used by your test dynamically
-      * SELENIUM_HOST, SELENIUM_PORT, SELENIUM_PLATFORM, SELENIUM_BROWSER, SELENIUM_VERSION
-      * [More info here](https://wiki.saucelabs.com/display/DOCS/Environment+Variables+Used+by+the+Jenkins+Plugin)
+# Maintaining your tests in the long term
 
 ---
 
