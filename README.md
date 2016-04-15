@@ -1,3 +1,5 @@
+class: center, middle
+
 # Selenium testing with Jenkins for great justice!
 ## Tips and tricks to make the most of your automated testing
 
@@ -8,14 +10,19 @@ Created by Jon Hermansen
 ---
 
 # About me
-		    
+
 ```perl
 #!/usr/bin/perl
 
-my $workplace = 'Verizon Digital Media';
+my $workplace = 'Verizon Digital Media Services';
 sub job_function { return 'Software Engineer in Test'; }
 my @languages = qw/js perl python/;
 ```
+
+* [We're hiring, check us out!](https://www.verizondigitalmedia.com/careers/)
+* I recently became Jenkins certified
+  * Jenkins Engineer
+  * CloudBees Jenkins Platform Jenkins Engineer
 
 ---
 
@@ -27,6 +34,8 @@ my @languages = qw/js perl python/;
 4. Maintaining your tests in the long term
 
 ---
+
+class: center, middle
 
 # Test philosophy
 
@@ -61,6 +70,8 @@ my @languages = qw/js perl python/;
 
 ---
 
+class: center, middle
+
 # Selenium intro
 
 ---
@@ -73,11 +84,10 @@ my @languages = qw/js perl python/;
 
 ---
 
-# It's easy to get started!
+# It's easy to get started
 ## You don't even need to know how to code!
 
 * You can record your actions and generate test code using these browser plugins:
-    * Firefox only :(
     * [Selenium IDE](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/)
     * [Selenium Builder](http://seleniumbuilder.github.io/se-builder/)
 * API testing? No problem!
@@ -86,7 +96,7 @@ my @languages = qw/js perl python/;
 
 ---
 
-# Should I use Selenium RC or WebDriver?
+# Should I use Selenium RC (v1) or WebDriver (v2, v3)?
 
 * Selenium RC is dead, effectively
 * WebDriver is the new way forward!
@@ -132,41 +142,39 @@ my @languages = qw/js perl python/;
 
 It's complicated... which client do you use?
 
-* Python official client - selenium - https://pypi.python.org/pypi/selenium
-* JS official client - selenium-webdriver - https://www.npmjs.com/package/selenium-webdriver
-* JS unofficial client - webdriver.io - http://webdriver.io/
-* seleniumhq.org has a list of clients on their download page: http://docs.seleniumhq.org/download/
+* [Python official client](https://pypi.python.org/pypi/selenium)
+* [JavaScript official client](https://www.npmjs.com/package/selenium-webdriver)
+* [JavaScript unofficial client](http://webdriver.io/)
+* seleniumhq.org has a list of clients on their [download page](http://docs.seleniumhq.org/download/) 
 
 ---
 
-# Selenium grid basics
+# Selenium Grid basics
 
 1. Install Jenkins 
-2. Install Selenium Plugin
+2. Install [Selenium Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Selenium+Plugin)
 3. Profit!!!
-
-...
-
-4. Point your tests at your Jenkins master port 4444, sending capabilities to allow grid to pick a capable server.
+4. Just kidding
+5. Point your tests at your Jenkins master port 4444, sending capabilities to allow grid to pick a capable server.
 
 ---
 
 # Browser differences
 
-* Firefox is lenient, does not throw an exception if element is off screen
+* Firefox is very lenient, does not throw an exception if element is off screen
 * Chrome will warn about missing/hidden elements, forcing you to code around asynchronous HTTP requests
     * You may need to set Selenium's resolution explicitly
-    * Lazy case: look for one of the last elements that is loaded on the screen before you start your test
-    * Best case: add a hook (global variable?) that your production application can use to signal it is ready for testing
+    * **Lazy case**: look for one of the last elements that is loaded on the screen before you start your test
+    * **Best case**: add a hook (global variable?) that your production application can use to signal it is ready for testing
     * Worst case: hook XmlHttpRequest until you see the required URL, wait until it is loaded, then run test code
 
 ---
 
 # Flaky tests?
 
-* test-stability: https://github.com/jenkinsci/test-stability-plugin
-* test-results-analyzer: https://github.com/jenkinsci/test-results-analyzer-plugin
-* quarantine: https://github.com/samsta/quarantine
+* [Test Stability Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Test+stability+plugin)
+* [Test Results Analyzer Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Test+Results+Analyzer+Plugin)
+* [Quarantine Plugin](https://github.com/samsta/quarantine)
 
 ---
 
@@ -177,8 +185,8 @@ It's complicated... which client do you use?
 * Find a way to determine when the application is fully loaded
 * Does your application's static content get cached?
 * Does your application serve compressed content?
-* Google's performance recommendations: https://developers.google.com/speed/
-* Mozilla's performance recommendations: https://developer.mozilla.org/en-US/Apps/Fundamentals/Performance/Performance_fundamentals
+* [Google's performance recommendations](https://developers.google.com/speed/)
+* [Mozilla's performance recommendations](https://developer.mozilla.org/en-US/Apps/Fundamentals/Performance/Performance_fundamentals)
 
 ---
 
@@ -186,9 +194,9 @@ It's complicated... which client do you use?
 
 * Run your tests as frequently and as quickly as possible
     * Provide quicker feedback to developers when they've broken something
-* Sauce Labs and similar services will enable you to do this.
-* NOT managing your own Selenium infrastructure will pay off in the short term.
-* See also: http://www.seleniumhq.org/ecosystem/
+* Sauce Labs and similar services will enable you to do this
+* **Not** managing your own Selenium infrastructure will pay off in the short term
+* [Selenium has a list of other similar services](http://www.seleniumhq.org/ecosystem/)
 
 ---
 
@@ -210,7 +218,7 @@ It's complicated... which client do you use?
 
 # Managing credentials
 
-* credentials-binding: https://github.com/jenkinsci/credentials-binding-plugin
+* [Credentials Binding Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Credentials+Binding+Plugin)
 * Add your credentials to Jenkins as an admin
 * Allow your credentials' use by colleagues
 * Git hack for HTTPS only: create a ~/.netrc file
@@ -222,11 +230,26 @@ It's complicated... which client do you use?
 
 * Secure transport communications with HTTPS, Lets Encrypt?
 * Disable "Anyone can do anything" in "Configure Global Security"
-* 
-* Wiki - Securing Jenkins: https://wiki.jenkins-ci.org/display/JENKINS/Securing+Jenkins
-* Wiki - Standard Security Setup: https://wiki.jenkins-ci.org/display/JENKINS/Standard+Security+Setup
+* [Jenkins Wiki - Securing Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Securing+Jenkins)
+* [Jenkins Wiki - Standard Security Setup](https://wiki.jenkins-ci.org/display/JENKINS/Standard+Security+Setup)
 * Jenkins credentials binding
 * Saucelabs wiki: https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials
+
+---
+
+# Authentication and Authorization
+
+* [Active Directory Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Active+Directory+plugin)
+    * This plugin only requires the hostname of your AD server
+* [GitHub Authentication Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Github+OAuth+Plugin)
+    * Easy to set up as a non-admin user
+    * Works with enterprise GitHub installations
+* [LDAP Plugin](https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Plugin)
+    * More complex setup which is dependent on your LDAP schema
+* [Matrix-based security](https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security)
+    * Give permissions based on groups
+* [Matrix Authorization Strategy Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Authorization+Strategy+Plugin)
+    * Give permissions based on groups, but on a per-project basis
 
 ---
 
@@ -240,13 +263,16 @@ It's complicated... which client do you use?
 ---
 
 # Show your progress frequently
-## "Check In Early, Check In Often" - Jeff Atwood
+> Check In Early, Check In Often
+> - Jeff Atwood
 
-* CI should be consumable by all stakeholders
-* Jobs that are created but broken are basically useless to anyone else but you
+* CI should be consumable by all stakeholders (QA, devs, product)
+* Half working jobs are basically useless to anyone else but you
 * Clean up after yourself!
-    * You can hide your experimental jobs in a folder:
---- cloudbees-folder (open source!): https://github.com/jenkinsci/cloudbees-folder-plugin
+    * Hide your experimental jobs in a folder:
+      * [CloudBees Folders Plugin](https://github.com/jenkinsci/cloudbees-folder-plugin) -- Open Source!
+    * Create a custom default view
+      * [Jenkins Wiki - Editing or Replacing the All View](https://wiki.jenkins-ci.org/display/JENKINS/Editing+or+Replacing+the+All+View)
 * Create an "information radiator" using Jenkins
     * Set up a second monitor to display it at all times
 
@@ -254,25 +280,11 @@ It's complicated... which client do you use?
 
 # Information radiator
 
-# Martin Fowler on communal dashboards: http://martinfowler.com/bliki/CommunalDashboard.html
-* build-monitor-plugin: https://github.com/jan-molak/jenkins-build-monitor-plugin
-* JAH TODO: more stuff here?
-* dashboard-view: https://github.com/jenkinsci/dashboard-view-plugin
-* Jenkins blog: https://jenkins.io/blog/2016/01/10/beautiful-jenkins-dashboard/
-
----
-
-# Authentication and Authorization
-
-* [Active Directory Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Active+Directory+plugin)
-    * This plugin only requires the hostname of your AD server
-* [GitHub Authentication Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Github+OAuth+Plugin)
-    * Easy to set up as a non-admin user
-    * Works with enterprise GitHub installations
-* [LDAP Plugin](https://wiki.jenkins-ci.org/display/JENKINS/LDAP+Plugin)
-    * More complex setup which is dependent on your LDAP schema
-* Matrix-based security: https://wiki.jenkins-ci.org/display/JENKINS/Matrix-based+security
-    * Give permissions based on groups
+* [Alistair Cockburn on Information radiators](http://alistair.cockburn.us/Information+radiator)
+> An Information radiator is a display posted in a place where people can see it as they work or walk by. It shows readers information they care about without having to ask anyone a question. This means more communication with fewer interruptions.
+* [Build Monitor Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Build+Monitor+Plugin)
+* [Dashboard View Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Dashboard+View)
+* [Jenkins Blog - A beautiful Jenkins dashboard](https://jenkins.io/blog/2016/01/10/beautiful-jenkins-dashboard/)
 
 ---
 
@@ -308,5 +320,12 @@ It's complicated... which client do you use?
 
 ---
 
+class: center, middle
+
 # Questions?
-  
+
+---
+
+class: center, middle
+
+# Thanks for coming!

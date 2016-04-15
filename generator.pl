@@ -32,8 +32,6 @@ my $template = <<END_TEMPLATE;
   <body>
     <textarea id="source">
 
-class: center, middle
-
 ${markdown}
     </textarea>
     <script src="./remark-latest.min.js">
