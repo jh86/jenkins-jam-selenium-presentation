@@ -173,6 +173,7 @@ It's complicated... which client do you use?
 # Flaky tests?
 
 * [Test Stability Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Test+stability+plugin)
+![Alt text](img/test-stability-example1.PNG)
 * [Test Results Analyzer Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Test+Results+Analyzer+Plugin)
 * [Quarantine Plugin](https://github.com/samsta/quarantine)
 
